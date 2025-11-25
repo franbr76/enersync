@@ -98,14 +98,18 @@ display: flex;
 
 
 header {
-    background-color: #7566D9;
+    background-color: #38a3a5;
     color: white;
     text-align: center;
     justify-content: center;
 }
+header img {
+    width: 100px;
+    margin-bottom: -45px;
+}
 
 footer {
-    background-color: #7566D9;
+    background-color: #38a3a5;
     color: white;
     text-align: center;
     justify-content: center;
@@ -122,14 +126,14 @@ footer {
 
 button {
     transition: all 0.2s ease-in-out;
-    background-color: #9C99F2;
+    background-color: #38A3A5;
     padding: 10px 20px;
     color: #fff;
     text-decoration: none;
     margin-right: 10px;
     margin-bottom: 20px;
     border-radius: 10px;
-    border: 3px solid #7566D9;
+    border: 2px solid #22577A;
     font-size: 16px;
     cursor: pointer;
     display: inline-block;
@@ -151,24 +155,24 @@ button a:hover {
 
 button:hover {
     transform: scale(1.05);
-    background-color: #7566D9;
+    background-color: #57CC99;
     color: #fff;
 }
 
 .btnSubmit {
     transition: all 0.2s ease-in-out;
-    background-color: #9C99F2;
+    background-color: #38a3a5;
     padding: 1vw;
     color: #fff;
     text-decoration: none;
     margin-bottom: 2vw;
     border-radius: 10px;
-    border: 3px solid #7566D9;
+    border: 3px solid #57CC99;
 }
 
 .btnSubmit:hover {
     transform: scaleX(1.05);
-    background-color: #7566D9;
+    background-color: #57CC99;
     color: #fff;
 }
 
@@ -176,14 +180,14 @@ button:hover {
 
 table{
 border-collapse: collapse; /*serve para juntar a borda da tabela, tira o efeito "3d"*/
-border: 2px solid #7566D9;
+border: 2px solid #22577A;
 border-radius: 6px;
 width: 100%;
 margin-top: 20px;
 }
 
 thead {
-    background-color: #7566D9;
+    background-color: #6C63FF;
 }
 
 thead th {
@@ -193,14 +197,14 @@ thead th {
 }
 
 tbody {
-    background-color: #f9f9f9;
+    background-color: #F7F9FA;
     
 }
 .linha {
 background-color: #fdfdfd;
 
 }
-
+/* seleciona todas as linhas pares de uma tabela ou todos os elementos pares de um grupo de irmãos no HTML, aplicando estilos a eles */
 .linha:nth-child(even) {
     background-color: #f2f2f2;
 }
@@ -215,14 +219,14 @@ th, td {
  
 }
 td{
-color: #333;
+color: #22577A;
 }
 
 
 .acoes {
     transition: all 0.3s ease-in-out;
     border-radius: 5px;
-    background-color: #7566D9;
+    background-color: #FF6B6B;
     padding: 8px 15px;
     color: #fff;
     text-decoration: none;
@@ -230,8 +234,8 @@ color: #333;
     margin-right: 5px;
 }
 .acoes:hover {
-    background-color: #5a4db8;
-    text-decoration: none;
+    /* background-color: #57CC99; */
+    text-decoration: underline;
     transform: scale(1.05);
 }
 

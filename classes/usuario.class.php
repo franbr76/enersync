@@ -1,6 +1,7 @@
 <?php
 require_once 'conexao.class.php';
-class Usuario {
+class Usuario
+{
 
     private $id;
     private $nome;
@@ -11,21 +12,24 @@ class Usuario {
 
     private $con;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->con = new Conexao();
     }
 
     // --------------------------------------------------------------------
     // GETTERS
     // --------------------------------------------------------------------
-    public function getTipoUsuario() {
+    public function getTipoUsuario()
+    {
         return $this->tipoUsuario;
     }
-    
+
     // --------------------------------------------------------------------
     // SETA OS DADOS DO USUÁRIO LOGADO
     // --------------------------------------------------------------------
-    public function setUsuario($id) {
+    public function setUsuario($id)
+    {
         $this->id = $id;
 
         $sql = $this->con->conectar()->prepare("
@@ -37,8 +41,8 @@ class Usuario {
         if ($sql->rowCount() > 0) {
             $dados = $sql->fetch(PDO::FETCH_ASSOC);
 
-            $this->nome        = $dados['nome'];
-            $this->email       = $dados['email'];
+            $this->nome = $dados['nome'];
+            $this->email = $dados['email'];
             $this->tipoUsuario = $dados['tipo_usuario'];
         }
     }
@@ -46,7 +50,8 @@ class Usuario {
     // --------------------------------------------------------------------
     // BUSCA OS DADOS DE UM USUÁRIO PELO ID
     // --------------------------------------------------------------------
-    public function buscar($id) {
+    public function buscar($id)
+    {
         $sql = $this->con->conectar()->prepare("
             SELECT * FROM usuarios WHERE id_usuario = :id
         ");
@@ -62,7 +67,8 @@ class Usuario {
     // --------------------------------------------------------------------
     // VERIFICA SE O EMAIL JÁ EXISTE
     // --------------------------------------------------------------------
-    public function existeEmail($email) {
+    public function existeEmail($email)
+    {
         $sql = $this->con->conectar()->prepare("
             SELECT id_usuario FROM usuarios WHERE email = :email LIMIT 1
         ");
@@ -76,16 +82,17 @@ class Usuario {
     // --------------------------------------------------------------------
     // ADICIONAR USUÁRIO
     // --------------------------------------------------------------------
-    public function adicionar($nome, $email, $senha, $tipoUsuario) {
+    public function adicionar($nome, $email, $senha, $tipoUsuario)
+    {
 
         if (count($this->existeEmail($email)) > 0) {
             return false; // email já existe
         }
 
         try {
-            $this->nome        = $nome;
-            $this->email       = $email;
-            $this->senhaHash   = md5($senha);
+            $this->nome = $nome;
+            $this->email = $email;
+            $this->senhaHash = md5($senha);
             $this->tipoUsuario = $tipoUsuario;
 
             $sql = $this->con->conectar()->prepare("
@@ -93,15 +100,15 @@ class Usuario {
                 VALUES (:nome, :email, :senhaHash, :tipoUsuario, NOW())
             ");
 
-            $sql->bindParam(":nome",        $this->nome);
-            $sql->bindParam(":email",       $this->email);
-            $sql->bindParam(":senhaHash",   $this->senhaHash);
+            $sql->bindParam(":nome", $this->nome);
+            $sql->bindParam(":email", $this->email);
+            $sql->bindParam(":senhaHash", $this->senhaHash);
             $sql->bindParam(":tipoUsuario", $this->tipoUsuario);
 
             $sql->execute();
             return true;
 
-        } catch(PDOException $ex) {
+        } catch (PDOException $ex) {
             return 'ERRO: ' . $ex->getMessage();
         }
     }
@@ -109,36 +116,38 @@ class Usuario {
     // --------------------------------------------------------------------
     // EDITAR USUÁRIO
     // --------------------------------------------------------------------
-    public function editar($id, $nome, $email, $tipoUsuario, $novaSenha = null) {
+    public function editar($id, $nome, $email, $tipoUsuario, $novaSenha = null)
+    {
 
-    $campos = "nome = :nome, email = :email, tipo_usuario = :tipoUsuario";
-    $params = [
-        ":id" => $id,
-        ":nome" => $nome,
-        ":email" => $email,
-        ":tipoUsuario" => $tipoUsuario // <-- Agora deve atualizar corretamente
-    ];
+        $campos = "nome = :nome, email = :email, tipo_usuario = :tipoUsuario";
+        $params = [
+            ":id" => $id,
+            ":nome" => $nome,
+            ":email" => $email,
+            ":tipoUsuario" => $tipoUsuario // <-- Agora deve atualizar corretamente
+        ];
 
-    if (!empty($novaSenha)) {
-        $senhaHash = md5($novaSenha);
-        $campos .= ", senha_hash = :senhaHash";
-        $params[":senhaHash"] = $senhaHash;
-    }
+        if (!empty($novaSenha)) {
+            $senhaHash = md5($novaSenha);
+            $campos .= ", senha_hash = :senhaHash";
+            $params[":senhaHash"] = $senhaHash;
+        }
 
-    $sql = $this->con->conectar()->prepare("
+        $sql = $this->con->conectar()->prepare("
         UPDATE usuarios 
         SET {$campos}
         WHERE id_usuario = :id
     ");
 
-    return $sql->execute($params); // <-- Uso de array de parâmetros, mais seguro
-}
+        return $sql->execute($params); // <-- Uso de array de parâmetros, mais seguro
+    }
 
 
     // --------------------------------------------------------------------
     // EXCLUIR USUÁRIO
     // --------------------------------------------------------------------
-    public function excluir($id) {
+    public function excluir($id)
+    {
         $sql = $this->con->conectar()->prepare("
             DELETE FROM usuarios WHERE id_usuario = :id
         ");
@@ -150,7 +159,8 @@ class Usuario {
     // --------------------------------------------------------------------
     // LISTAR TODOS OS USUÁRIOS
     // --------------------------------------------------------------------
-    public function listar() {
+    public function listar()
+    {
         $sql = $this->con->conectar()->prepare("
             SELECT * FROM usuarios ORDER BY id_usuario DESC
         ");
@@ -162,7 +172,8 @@ class Usuario {
     // --------------------------------------------------------------------
     // LOGIN DO USUÁRIO
     // --------------------------------------------------------------------
-    public function fazerLogin($email, $senha) {
+    public function fazerLogin($email, $senha)
+    {
         $senhaHash = $senha;
 
         $sql = $this->con->conectar()->prepare("
@@ -187,7 +198,8 @@ class Usuario {
     // --------------------------------------------------------------------
     // VERIFICA PERMISSÃO (TIPO DE USUÁRIO)
     // --------------------------------------------------------------------
-    public function temPermissao($tipo) {
+    public function temPermissao($tipo)
+    {
         return ($this->tipoUsuario === $tipo);
     }
 

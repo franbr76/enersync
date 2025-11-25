@@ -1,12 +1,12 @@
 <?php
-include 'classes/usuario.class.php';
-$con = new Usuario();
+include 'classes/parceiro.class.php';
+$con = new Parceiro();
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $con->excluir($id);
-    header("Location: gestaoUsuario.php");
+    header("Location: gestaoParceiro.php");
 } else {
     echo '<script type="text/javascript">alert("Erro ao excluir veiculo");</script>';
-    header("Location: gestaoUsuario.php");
+    header("Location: gestaoParceiro.php");
 }

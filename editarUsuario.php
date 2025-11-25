@@ -83,7 +83,7 @@ $tiposUsuarioDisponiveis = ['admin', 'usuario'];
 
             <?php foreach ($tiposUsuarioDisponiveis as $tipo): ?>
                 <label>
-                    <input type="radio" name="tipo_usuario" value="<?php echo $tipo;?>" <?php echo ($info['tipo_usuario'] == $tipo) ? 'checked' : ''; ?> required>
+                    <input type="radio" name="tipo_usuario" value="<?php echo $tipo; ?>" <?php echo ($info['tipo_usuario'] == $tipo) ? 'checked' : ''; ?> required>
                     <?php echo ucfirst($tipo); ?>
                 </label>
 
@@ -93,7 +93,7 @@ $tiposUsuarioDisponiveis = ['admin', 'usuario'];
 
 
             <input type="submit" value="SALVAR" class="btnSubmit" />
-            <a href="index.php" class="acoes" style="background-color: #5a6268;">VOLTAR</a>
+            <a href="index.php" class="acoes" style="background-color: #38A3A5;">VOLTAR</a>
         </div>
     </form>
 </div>

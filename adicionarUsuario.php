@@ -11,7 +11,7 @@ if (isset($_POST['email']) && !empty($_POST['email'])) {
     $email = addslashes($_POST['email']);
     $senha = addslashes($_POST['senha']);
     $tipoUsuario = addslashes($_POST['tipo_usuario']);
-    
+
 
     $usuario->adicionar($nome, $email, $senha, $tipoUsuario);
 
@@ -32,13 +32,13 @@ if (isset($_POST['email']) && !empty($_POST['email'])) {
         <div class="card" style="width: 100%;">
 
             Nome <br>
-            <input type="text" name="nome" placeholder="Digite o nome" required/> <br><br>
+            <input type="text" name="nome" placeholder="Digite o nome" required /> <br><br>
 
             Email <br>
-            <input type="email" name="email" placeholder="Digite o email" required/> <br><br>
+            <input type="email" name="email" placeholder="Digite o email" required /> <br><br>
 
             Senha <br>
-            <input type="password" name="senha" placeholder="Digite a senha" required/> <br><br>
+            <input type="password" name="senha" placeholder="Digite a senha" required /> <br><br>
 
             Tipo de Usuário <br>
             <select name="tipo_usuario" required>

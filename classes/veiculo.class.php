@@ -1,114 +1,121 @@
 <?php
 require_once 'conexao.class.php';
 
-class Veiculo {
-    private $id;
-    private $id_usuario;
-    private $marca;
-    private $modelo;
-    private $autonomia_km;
-    private $capacidade_bateria_kwh;
-    private $eficiencia_km_por_kwh;
-    private $desgaste_percentual;
-    private $ano;
+class Veiculo
+{
 
     private $con;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->con = new Conexao();
     }
 
-    public function adicionar($id_usuario, $marca, $modelo, $autonomia, $capacidade, $eficiencia, $desgaste, $ano) {
+    // --------------------------------------------------------------------
+    // BUSCA OS DADOS DE UM VEÍCULO PELO ID
+    // --------------------------------------------------------------------
+    public function buscar($id)
+    {
+        $sql = $this->con->conectar()->prepare("
+            SELECT * FROM veiculos WHERE id_veiculo = :id
+        ");
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
+
+    // --------------------------------------------------------------------
+    // ADICIONAR VEÍCULO
+    // --------------------------------------------------------------------
+    public function adicionar($id_usuario, $marca, $modelo, $autonomia_km, $capacidade_bateria_kwh, $eficiencia_km_por_kwh, $desgaste_percentual, $ano)
+    {
         try {
             $sql = $this->con->conectar()->prepare("
                 INSERT INTO veiculos (
                     id_usuario, marca, modelo, autonomia_km, capacidade_bateria_kwh,
                     eficiencia_km_por_kwh, desgaste_percentual, ano
                 ) VALUES (
-                    :id_usuario, :marca, :modelo, :autonomia, :capacidade,
-                    :eficiencia, :desgaste, :ano
+                    :id_usuario, :marca, :modelo, :autonomia_km, :capacidade_bateria_kwh,
+                    :eficiencia_km_por_kwh, :desgaste_percentual, :ano
                 )
             ");
 
             $sql->bindParam(":id_usuario", $id_usuario);
             $sql->bindParam(":marca", $marca);
             $sql->bindParam(":modelo", $modelo);
-            $sql->bindParam(":autonomia", $autonomia);
-            $sql->bindParam(":capacidade", $capacidade);
-            $sql->bindParam(":eficiencia", $eficiencia);
-            $sql->bindParam(":desgaste", $desgaste);
+            $sql->bindParam(":autonomia_km", $autonomia_km);
+            $sql->bindParam(":capacidade_bateria_kwh", $capacidade_bateria_kwh);
+            $sql->bindParam(":eficiencia_km_por_kwh", $eficiencia_km_por_kwh);
+            $sql->bindParam(":desgaste_percentual", $desgaste_percentual);
             $sql->bindParam(":ano", $ano);
 
             $sql->execute();
-            return TRUE;
+            return true;
 
-        } catch(PDOException $ex) {
+        } catch (PDOException $ex) {
             return 'ERRO: ' . $ex->getMessage();
         }
     }
 
-    public function listar() {
-        try {
-            $sql = $this->con->conectar()->prepare("SELECT * FROM veiculos");
-            $sql->execute();
-            return $sql->fetchAll();
-        } catch(PDOException $ex) {
-            echo "ERRO: ".$ex->getMessage();
-        }
+    // --------------------------------------------------------------------
+    // EDITAR VEÍCULO
+    // --------------------------------------------------------------------
+    public function editar($id_veiculo, $marca, $modelo, $autonomia_km, $capacidade_bateria_kwh, $eficiencia_km_por_kwh, $desgaste_percentual, $ano)
+    {
+
+        $sql = $this->con->conectar()->prepare("
+            UPDATE veiculos 
+            SET 
+                marca = :marca, 
+                modelo = :modelo, 
+                autonomia_km = :autonomia_km, 
+                capacidade_bateria_kwh = :capacidade_bateria_kwh,
+                eficiencia_km_por_kwh = :eficiencia_km_por_kwh,
+                desgaste_percentual = :desgaste_percentual,
+                ano = :ano
+            WHERE id_veiculo = :id_veiculo
+        ");
+
+        $sql->bindParam(":id_veiculo", $id_veiculo);
+        $sql->bindParam(":marca", $marca);
+        $sql->bindParam(":modelo", $modelo);
+        $sql->bindParam(":autonomia_km", $autonomia_km);
+        $sql->bindParam(":capacidade_bateria_kwh", $capacidade_bateria_kwh);
+        $sql->bindParam(":eficiencia_km_por_kwh", $eficiencia_km_por_kwh);
+        $sql->bindParam(":desgaste_percentual", $desgaste_percentual);
+        $sql->bindParam(":ano", $ano);
+
+        return $sql->execute();
     }
 
-    public function buscar($id) {
-        try {
-            $sql = $this->con->conectar()->prepare("SELECT * FROM veiculos WHERE id_veiculo = :id");
-            $sql->bindValue(":id", $id);
-            $sql->execute();
+    // --------------------------------------------------------------------
+    // EXCLUIR VEÍCULO
+    // --------------------------------------------------------------------
+    public function excluir($id)
+    {
+        $sql = $this->con->conectar()->prepare("
+            DELETE FROM veiculos WHERE id_veiculo = :id
+        ");
+        $sql->bindValue(":id", $id);
 
-            return ($sql->rowCount() > 0) ? $sql->fetch() : array();
-
-        } catch(PDOException $ex) {
-            echo "ERRO: ".$ex->getMessage();
-        }
+        return $sql->execute();
     }
 
-    public function editar($id, $marca, $modelo, $autonomia, $capacidade, $eficiencia, $desgaste, $ano) {
-        try {
-            $sql = $this->con->conectar()->prepare("
-                UPDATE veiculos SET
-                    marca = :marca,
-                    modelo = :modelo,
-                    autonomia_km = :autonomia,
-                    capacidade_bateria_kwh = :capacidade,
-                    eficiencia_km_por_kwh = :eficiencia,
-                    desgaste_percentual = :desgaste,
-                    ano = :ano
-                WHERE id_veiculo = :id
-            ");
+    // --------------------------------------------------------------------
+    // LISTAR TODOS OS VEÍCULOS
+    // --------------------------------------------------------------------
+    public function listar()
+    {
+        $sql = $this->con->conectar()->prepare("
+            SELECT * FROM veiculos ORDER BY id_veiculo DESC
+        ");
+        $sql->execute();
 
-            $sql->bindParam(":marca", $marca);
-            $sql->bindParam(":modelo", $modelo);
-            $sql->bindParam(":autonomia", $autonomia);
-            $sql->bindParam(":capacidade", $capacidade);
-            $sql->bindParam(":eficiencia", $eficiencia);
-            $sql->bindParam(":desgaste", $desgaste);
-            $sql->bindParam(":ano", $ano);
-            $sql->bindParam(":id", $id);
-
-            $sql->execute();
-            return TRUE;
-
-        } catch(PDOException $ex){
-            echo "ERRO: ".$ex->getMessage();
-            return FALSE;
-        }
-    }
-
-    public function deletar($id) {
-        try {
-            $sql = $this->con->conectar()->prepare("DELETE FROM veiculos WHERE id_veiculo = :id");
-            $sql->bindValue(':id', $id);
-            $sql->execute();
-        } catch(PDOException $ex) {
-            echo "ERRO: ".$ex->getMessage();
-        }
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+?>

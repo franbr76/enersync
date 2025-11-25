@@ -14,7 +14,25 @@ class Parceiro {
         $this->con = new Conexao();
     }
 
+    // --------------------------------------------------------------------
+    // VERIFICA SE O CNPJ JÁ EXISTE
+    // --------------------------------------------------------------------
+    public function existeCnpj($cnpj, $id_parceiro = 0) {
+        $sql = $this->con->conectar()->prepare("
+            SELECT id_parceiro FROM parceiros WHERE cnpj = :cnpj AND id_parceiro != :id_parceiro LIMIT 1
+        ");
+        $sql->bindValue(":cnpj", $cnpj);
+        $sql->bindValue(":id_parceiro", $id_parceiro);
+        $sql->execute();
+
+        return $sql->rowCount() > 0;
+    }
+
     public function adicionar($nome, $cnpj, $contato, $comissao) {
+        if ($this->existeCnpj($cnpj)) {
+            return 'CNPJ já cadastrado!';
+        }
+        
         try {
             $sql = $this->con->conectar()->prepare("
                 INSERT INTO parceiros (nome_empresa, cnpj, contato, porcentagem_comissao)
@@ -59,6 +77,10 @@ class Parceiro {
     }
 
     public function editar($id, $nome, $cnpj, $contato, $comissao) {
+        if ($this->existeCnpj($cnpj, $id)) {
+            return 'CNPJ já cadastrado por outro parceiro!';
+        }
+        
         try {
             $sql = $this->con->conectar()->prepare("
                 UPDATE parceiros SET
@@ -84,7 +106,7 @@ class Parceiro {
         }
     }
 
-    public function deletar($id) {
+    public function excluir($id) {
         try {
             $sql = $this->con->conectar()->prepare("DELETE FROM parceiros WHERE id_parceiro = :id");
             $sql->bindValue(':id', $id);

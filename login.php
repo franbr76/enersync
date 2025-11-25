@@ -3,17 +3,17 @@ session_start();
 require "inc/header.inc.php";
 require 'classes/usuario.class.php';
 
-if(!empty($_POST['email'])){
+if (!empty($_POST['email'])) {
     $email = addslashes($_POST['email']);
     $senha = md5($_POST['senha']);
 
     $usuario = new Usuario();
 
     $idUsuario = $usuario->fazerLogin($email, $senha);
-    
-    if($idUsuario){
+
+    if ($idUsuario) {
         $_SESSION['logado'] = $idUsuario;
-        
+
         header("Location: index.php");
         exit();
     } else {

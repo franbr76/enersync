@@ -25,8 +25,8 @@ $fn = new Funcoes();
 // }
 
 ?>
-<h1 class="titulo">Bem vindo(a), <?php  echo $info['nome']; ?></h1>
-    <a class="sair" href="sair.php">SAIR</a>
+<h1 class="titulo">Bem vindo(a), <?php echo $info['nome']; ?></h1>
+<a class="sair" href="sair.php" onclick="return confirm('Tem certeza que deseja sair?');">SAIR</a>
 <div class="menu">
     <button class="menu-button"><a href="#">Planejar Viagem</a></button>
     <button class="menu-button"><a href="#">Comparar Veiculos</a></button>
@@ -34,13 +34,16 @@ $fn = new Funcoes();
 </div>
 
 <div class="menu" style="gap: 100px;">
-    
-    <?php if($usuario->temPermissao("admin")): ?>
-<button class="menu-button"><a href="gestaoUsuario.php">Gestão de Usuários</a></button>
-<?php endif; ?>
-    <?php if($usuario->temPermissao("admin")): ?>
-<button class="menu-button"><a href="gestaoUsuario.php">Gestão de Veiculos</a></button>
-<?php endif; ?>
+
+    <?php if ($usuario->temPermissao("admin")): ?>
+        <button class="menu-button"><a href="gestaoUsuario.php">Gestão de Usuários</a></button>
+    <?php endif; ?>
+    <?php if ($usuario->temPermissao("admin")): ?>
+        <button class="menu-button"><a href="gestaoVeiculo.php">Gestão de Veiculos</a></button>
+    <?php endif; ?>
+    <?php if ($usuario->temPermissao("admin")): ?>
+        <button class="menu-button"><a href="gestaoParceiro.php">Gestão de Parceiros</a></button>
+    <?php endif; ?>
 </div>
 
 <?php include 'inc/footer.inc.php'; ?>

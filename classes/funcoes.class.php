@@ -1,10 +1,12 @@
 <?php
 
-class Funcoes {
-    public function dtNasc($vlr, $tipo) {
+class Funcoes
+{
+    public function dtNasc($vlr, $tipo)
+    {
         switch ($tipo) {
             case 1:
-                $rst = implode("-", array_reverse(explode("/",  $vlr))); // converte data brasil p/ internacional
+                $rst = implode("-", array_reverse(explode("/", $vlr))); // converte data brasil p/ internacional
                 break;
             case 2:
                 $rst = implode("/", array_reverse(explode("-", $vlr)));
@@ -14,7 +16,8 @@ class Funcoes {
         }
         return $rst;
     }
-    public function formatarDataHora($dataHora) {
+    public function formatarDataHora($dataHora)
+    {
         if (empty($dataHora)) {
             return "";
         }
@@ -30,7 +33,7 @@ class Funcoes {
         // Formata no padrão brasileiro: DD/MM/YYYY HH:MM
         return date("d/m/Y H:i", $timestamp);
     }
-    
+
 
 }
 

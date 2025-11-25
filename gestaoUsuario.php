@@ -30,7 +30,7 @@ if ($usuario->getTipoUsuario() != "admin") {
 <div style="margin-bottom: 20px;">
     <button><a href="adicionarUsuario.php">ADICIONAR</a></button>
     <button><a href="index.php">INÍCIO</a></button>
-    <a class="sair" href="sair.php">SAIR</a>
+    <a class="sair" href="sair.php" onclick="return confirm('Tem certeza que deseja sair?');">SAIR</a>
 </div>
 
 <table border="3" width="100%">
@@ -43,14 +43,14 @@ if ($usuario->getTipoUsuario() != "admin") {
             <th>DATA DE CADASTRO</th>
             <th>AÇÕES</th>
         </tr>
-    </thead>
+    </thead> 
     <tbody>
- <?php
+        <?php
 
-    $lista = $usuario->listar();
+        $lista = $usuario->listar();
 
-    foreach ($lista as $item):
-        ?>
+        foreach ($lista as $item):
+            ?>
             <tr class="linha">
                 <td><?php echo $item['id_usuario']; ?></td>
                 <td><?php echo $item['nome']; ?></td>
