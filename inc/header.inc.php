@@ -38,7 +38,7 @@ $usuario_logado = isset($_SESSION['logado']); // Usando a variável de sessão '
               <a class="nav-link active" aria-current="page" href="index.php">Início</a>
             </li>
             <li class="nav-item"><a class="nav-link" href="planejarViagem.php">Planejar Viagem</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Comparar Veiculos</a></li>
+            <li class="nav-item"><a class="nav-link" href="compararVeiculo.php">Comparar Veiculos</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Comprar Peças</a></li>
             
 

@@ -13,7 +13,10 @@ body {
     margin: 0; */
     font-family: Poppins;
     /* background-color: white; */
-
+    body {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+}
 }
 
 
