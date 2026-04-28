@@ -61,8 +61,8 @@ if (isset($_POST['marca']) && !empty($_POST['marca'])) {
 
 ?>
 
-<button class="btnVoltar">
-    <a href="gestaoVeiculo.php">VOLTAR</a>
+<button class="btn btn-success d-inline-flex align-items-center" type="button" onclick="window.location.href= 'gestaoVeiculo.php'">
+   VOLTAR
 </button>
 
 <h1>Cadastrar Veículo</h1>

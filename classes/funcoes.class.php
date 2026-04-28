@@ -34,7 +34,7 @@ class Funcoes
         return date("d/m/Y H:i", $timestamp);
     }
 
-
+                
 }
 
 ?>

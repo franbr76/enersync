@@ -51,8 +51,8 @@ if (isset($_POST['nome_empresa']) && !empty($_POST['nome_empresa'])) {
 
 ?>
 
-<button class="btnVoltar">
-    <a href="gestaoParceiro.php">VOLTAR</a>
+<button class="btn btn-success d-inline-flex align-items-center" type="button" onclick="window.location.href= 'gestaoParceiro.php'">
+   VOLTAR
 </button>
 
 <h1>Cadastrar Parceiro</h1>

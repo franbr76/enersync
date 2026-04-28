@@ -1,11 +1,23 @@
+CORES {
+color: #7566D9;
+color: #6C63FF;
+color: #22577A;
+color: #57CC99;
+color: #22577A;
+color: #38a3a5;
+}
+
 html,
 body {
-    height: 100%;
-    margin: 0;
+    /* height: 100%;
+    margin: 0; */
     font-family: Poppins;
-    background-color: white;
+    /* background-color: white; */
 
 }
+
+
+
 
 h1 {
 text-align: center;
@@ -13,6 +25,8 @@ margin-inline: auto;
 
 
 }
+
+
 
 p {
     text-align: center;
@@ -45,12 +59,12 @@ display: flex;
 .menu-button:hover {
     transform: scale(1.6);
 }
-.main {
+/* .main {
     flex: 1;
     margin-inline: 100px;
  
-    /* aumenta o conteudo para preencher espaco*/
-}
+     aumenta o conteudo para preencher espaco
+} */
 
 .container {
     display: flex;
@@ -83,10 +97,10 @@ display: flex;
     /* float: right; */
     background-color: lightcoral;
     display: inline-block;
-    padding: 10px 20px;
+    padding: 5px 10px;
     text-decoration: none;
     color: white;
-    border-radius: 10px;
+    border-radius: 1px;
     transition: all 0.2s ease-in-out;
 }
 
@@ -108,14 +122,14 @@ header img {
     margin-bottom: -45px;
 }
 
-footer {
-    background-color: #38a3a5;
-    color: white;
-    text-align: center;
+/* footer { */
+    /* background-color: #38a3a5; */
+    /* color: white; */
+    /* text-align: center;
     justify-content: center;
-    align-content: center;
-    height: 8vw;
-}
+    align-content: center; */
+    /* height: 8vw; */
+/* } */
 
 .btnVoltar {
     position: absolute;

@@ -28,14 +28,20 @@ if ($usuario->getTipoUsuario() != "admin") {
 ?>
 <h1 class="titulo">Gestão de Parceiros</h1>
 
-<div style="margin-bottom: 20px;">
-    <button><a href="adicionarParceiro.php">ADICIONAR PARCEIRO</a></button>
-    <button><a href="index.php">INÍCIO</a></button>
-    <a class="sair" href="sair.php">SAIR</a>
+
+<div class="d-flex  justify-content-start py-1">
+    <button class="btn btn-success d-inline-flex align-items-center" type="button"
+        onclick="window.location.href ='adicionarParceiro.php'">
+        Adicionar Parceiro
+
+    </button>
+
 </div>
 
-<table border="3" width="100%">
-    <thead>
+
+<table class="table table-dark table-striped">
+
+    <thead class="table-light">
         <tr>
             <th>ID</th>
             <th>NOME DA EMPRESA</th>
@@ -60,11 +66,26 @@ if ($usuario->getTipoUsuario() != "admin") {
                 <td><?php echo $item['porcentagem_comissao']; ?></td>
 
                 <td>
-                    <a class="acoes" href="editarParceiro.php?id=<?php echo $item['id_parceiro']; ?>">EDITAR</a>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-primary d-inline-flex align-items-center" type="button"
+                            onclick="window.location.href ='editarParceiro.php?id=<?php echo $item['id_parceiro']; ?>'">
+                            EDITAR
 
-                    <a class="acoes" href="excluirParceiro.php?id=<?php echo $item['id_parceiro']; ?>"
-                        onclick="return confirm('Tem certeza que deseja excluir este parceiro?');">
-                        EXCLUIR
+                        </button>
+
+
+
+                        <button class="btn btn-danger d-inline-flex align-items-center" type="button"
+                            onclick="abrirModalConfirmacao(
+  'Excluir Parceiro',
+  'Tem certeza que deseja excluir este parceiro?',
+  () => window.location.href = 'excluirParceiro.php?id=<?php echo $item['id_parceiro']; ?>'
+)">
+EXCLUIR
+
+                        </button>
+
+                    </div>
                     </a>
                 </td>
             </tr>

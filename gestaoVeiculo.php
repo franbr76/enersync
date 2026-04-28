@@ -29,13 +29,20 @@ if ($usuario->getTipoUsuario() != "admin") {
 <h1 class="titulo">Gestão de Veículos</h1>
 
 <div style="margin-bottom: 20px;">
-    <button><a href="adicionarVeiculo.php">ADICIONAR VEÍCULO</a></button>
-    <button><a href="index.php">INÍCIO</a></button>
-    <a class="sair" href="sair.php" onclick="return confirm('Tem certeza que deseja sair?');">SAIR</a>
+    
+
+<div class="d-flex  justify-content-start py-1">
+    <button class="btn btn-success d-inline-flex align-items-center" type="button"
+        onclick="window.location.href ='adicionarVeiculo.php'">
+        Adicionar Veiculo
+
+    </button>
+
 </div>
 
-<table border="3" width="100%">
-    <thead>
+<table class="table table-dark table-striped">
+
+    <thead class="table-light">
         <tr>
             <th>ID</th>
             <th>MARCA</th>
@@ -66,11 +73,26 @@ if ($usuario->getTipoUsuario() != "admin") {
                 <td><?php echo $item['ano']; ?></td>
 
                 <td>
-                    <a class="acoes" href="editarVeiculo.php?id=<?php echo $item['id_veiculo']; ?>">EDITAR</a>
+                   <div class="d-flex gap-2">
+                        <button class="btn btn-primary d-inline-flex align-items-center" type="button"
+                            onclick="window.location.href ='editarVeiculo.php?id=<?php echo $item['id_veiculo']; ?>'">
+                            EDITAR
 
-                    <a class="acoes" href="excluirVeiculo.php?id=<?php echo $item['id_veiculo']; ?>"
-                        onclick="return confirm('Tem certeza que deseja excluir este veículo?');">
-                        EXCLUIR
+                        </button>
+
+
+
+                        <button class="btn btn-danger d-inline-flex align-items-center" type="button"
+                            onclick="abrirModalConfirmacao(
+  'Excluir Veículo',
+  'Tem certeza que deseja excluir este veículo?',
+  () => window.location.href = 'excluirVeiculo.php?id=<?php echo $item['id_veiculo']; ?>'
+)">
+EXCLUIR
+
+                        </button>
+
+                    </div>
                     </a>
                 </td>
             </tr>

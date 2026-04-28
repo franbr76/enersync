@@ -21,8 +21,8 @@ if (isset($_POST['email']) && !empty($_POST['email'])) {
 
 ?>
 
-<button class="btnVoltar">
-    <a href="gestaoUsuario.php">VOLTAR</a>
+<button class="btn btn-success d-inline-flex align-items-center" type="button" onclick="window.location.href= 'gestaoUsuario.php'">
+   VOLTAR
 </button>
 
 <h1>Cadastrar Usuário</h1>

@@ -8,6 +8,7 @@ include 'classes/funcoes.class.php';
 // Se não estiver logado, volta para o login
 if (!isset($_SESSION['logado'])) {
     $_SESSION['logado'] = $idUsuario;
+    
     header('Location: login.php');
     exit;
 }
@@ -25,16 +26,24 @@ if ($usuario->getTipoUsuario() != "admin") {
 }
 
 ?>
-<h1 class="titulo">Usuários</h1>
 
-<div style="margin-bottom: 20px;">
-    <button><a href="adicionarUsuario.php">ADICIONAR</a></button>
-    <button><a href="index.php">INÍCIO</a></button>
-    <a class="sair" href="sair.php" onclick="return confirm('Tem certeza que deseja sair?');">SAIR</a>
+
+<h1 class="titulo">Gestão de Usuários</h1>
+
+
+<div class="d-flex  justify-content-start py-1">
+    <button class="btn btn-success d-inline-flex align-items-center" type="button"
+        onclick="window.location.href ='adicionarUsuario.php'">
+        Adicionar Usuário
+
+    </button>
+
 </div>
 
-<table border="3" width="100%">
-    <thead>
+
+<table class="table table-dark table-striped">
+
+    <thead class="table-light">
         <tr>
             <th>ID</th>
             <th>NOME</th>
@@ -43,8 +52,9 @@ if ($usuario->getTipoUsuario() != "admin") {
             <th>DATA DE CADASTRO</th>
             <th>AÇÕES</th>
         </tr>
-    </thead> 
+    </thead>
     <tbody>
+
         <?php
 
         $lista = $usuario->listar();
@@ -59,12 +69,28 @@ if ($usuario->getTipoUsuario() != "admin") {
                 <td><?php echo $fn->formatarDataHora($item['data_cadastro']); ?></td>
 
                 <td>
-                    <a class="acoes" href="editarUsuario.php?id=<?php echo $item['id_usuario']; ?>">EDITAR</a>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-primary d-inline-flex align-items-center" type="button"
+                            onclick="window.location.href ='editarUsuario.php?id=<?php echo $item['id_usuario']; ?>'">
+                            EDITAR
 
-                    <a class="acoes" href="excluirUsuario.php?id=<?php echo $item['id_usuario']; ?>"
-                        onclick="return confirm('Tem certeza que deseja excluir este usuário?');">
-                        EXCLUIR
-                    </a>
+                        </button>
+
+
+
+                        <button class="btn btn-danger d-inline-flex align-items-center" type="button" onclick="abrirModalConfirmacao(
+                 'Excluir Usuário',
+             'Tem certeza que deseja excluir este usuário?',
+                 () => window.location.href = 'excluirUsuario.php?id=<?php echo $item['id_usuario']; ?>'
+                            )">
+                            EXCLUIR
+
+                        </button>
+
+
+
+
+                    </div>
                 </td>
             </tr>
         <?php endforeach; ?>
