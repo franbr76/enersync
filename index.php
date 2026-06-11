@@ -78,8 +78,8 @@ $fn = new Funcoes();
             viagem — tudo com base na autonomia real da sua bateria. Mais do que um app, somos seu assistente de energia
             em cada quilômetro.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-            <button type="button" class="btn btn-ener btn-lg px-4 me-sm-3" onclick="window.location.href='planejarViagem.php'">Planejar viagem</button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Comparar veículos</button>
+            <button type="button" class="btn btn-ener btn-lg px-4 me-sm-3" onclick="window.location.href='planejar.php'">Planejar viagem</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="window.location.href='compararVeiculo.php'">Comparar veículos</button>
         </div>
     </div>
 
