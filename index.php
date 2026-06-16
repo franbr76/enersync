@@ -53,20 +53,26 @@ $fn = new Funcoes();
         <button class="btn btn-ener d-inline-flex align-items-center" type="button"
             onclick="window.location.href ='gestaoUsuario.php'">
             Gestão Usuário
-        <?php endif; ?>
-        <?php if ($usuario->temPermissao("admin")): ?>
-            <button class="btn btn-ener d-inline-flex align-items-center" type="button"
-                onclick="window.location.href ='gestaoVeiculo.php'">
-                Gestão Veículo
-            <?php endif; ?>
-            <?php if ($usuario->temPermissao("admin")): ?>
-                <button class="btn btn-ener d-inline-flex align-items-center" type="button"
-                    onclick="window.location.href ='gestaoParceiro.php'">
-                    Gestão Parceiro
-                <?php endif; ?>
-
-            </button>
-
+        </button>
+    <?php endif; ?>
+    <?php if ($usuario->temPermissao("admin")): ?>
+        <button class="btn btn-ener d-inline-flex align-items-center" type="button"
+            onclick="window.location.href ='gestaoVeiculo.php'">
+            Gestão Veículo
+        </button>
+    <?php endif; ?>
+    <?php if ($usuario->temPermissao("admin")): ?>
+        <button class="btn btn-ener d-inline-flex align-items-center" type="button"
+            onclick="window.location.href ='gestaoParceiro.php'">
+            Gestão Parceiro
+        </button>
+    <?php endif; ?>
+    <?php if ($usuario->temPermissao("admin")): ?>
+        <button class="btn btn-ener d-inline-flex align-items-center" type="button"
+            onclick="window.location.href ='gestaoPecas.php'">
+            Gestão Peças
+        </button>
+    <?php endif; ?>
 </div>
 
 
@@ -78,8 +84,10 @@ $fn = new Funcoes();
             viagem — tudo com base na autonomia real da sua bateria. Mais do que um app, somos seu assistente de energia
             em cada quilômetro.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-            <button type="button" class="btn btn-ener btn-lg px-4 me-sm-3" onclick="window.location.href='planejar.php'">Planejar viagem</button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="window.location.href='compararVeiculo.php'">Comparar veículos</button>
+            <button type="button" class="btn btn-ener btn-lg px-4 me-sm-3"
+                onclick="window.location.href='planejar.php'">Planejar viagem</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4"
+                onclick="window.location.href='compararVeiculo.php'">Comparar veículos</button>
         </div>
     </div>
 

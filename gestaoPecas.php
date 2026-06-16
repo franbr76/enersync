@@ -35,7 +35,7 @@ if ($usuario->getTipoUsuario() != "admin") {
     <button
         class="btn btn-success d-inline-flex align-items-center"
         type="button"
-        onclick="window.location.href ='cadastrarPeca.php'">
+        onclick="window.location.href ='adicionarPeca.php'">
 
         Adicionar Peça
 

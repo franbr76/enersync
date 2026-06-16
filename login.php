@@ -33,7 +33,7 @@ if (!empty($_POST['email'])) {
             Senha: <br>
             <input type="password" name="senha" required> <br><br>
 
-            <input type="submit" value="LOGIN">
+            <input type="submit" name="botao" value="LOGIN">
 
             <a class="esqueceuSenha" href="esqueceuSenha.php">ESQUECEU SENHA?</a><br>
             <a class="esqueceuSenha" style="margin-left: 0;" href="adicionarUsuario.php">Não possui conta? Crie uma</a>
